@@ -50,6 +50,28 @@ const geoportal = function () {
   })
 
 
+
+  map.addLayer(
+    new ol.layer.VectorImage({
+      source: new ol.source.Vector({
+        url: '../data/warstwy gis GEOJSON/szczytno_3857_geojson.geojson',
+        format: new ol.format.GeoJSON()
+      })
+    })
+  )
+
+  const suikzpExtent = [2333232.4535, 7084767.8512, 2341708.2129, 7091120.6602]
+  map.addLayer(
+    new ol.layer.Image({
+      source: new ol.source.ImageStatic({
+        url: '../suikzp.png',
+        imageExtent: suikzpExtent,
+
+      })
+    })
+  )
+
+
 }
 
 geoportal()
