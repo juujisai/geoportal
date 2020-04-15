@@ -65,20 +65,38 @@ button.continue {
 
 .layerList {
   display: none;
+  transition: .2s;
 }
 
 .layerList.active {
   display: block;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 85vh;
-  /* border: 15px solid black; */
   overflow-y: scroll;
   background-color: #ddd;
   font-size: 17px;
+  animation: layersAnimate .2s ease both;
 }
+
+@keyframes layersAnimate {
+  0% {
+    display: none;
+    left: -100%;
+  }
+
+  5% {
+    display: block;
+  }
+
+  100% {
+    left: 0;
+  }
+
+}
+
 
 .layerList p {
   padding: 10px 0;
