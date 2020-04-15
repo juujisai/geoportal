@@ -54,7 +54,7 @@ const geoportal = function () {
   map.addLayer(
     new ol.layer.VectorImage({
       source: new ol.source.Vector({
-        url: '../data/warstwy gis GEOJSON/szczytno_3857_geojson.geojson',
+        url: './../data/warstwy gis GEOJSON/szczytno_3857_geojson.geojson',
         format: new ol.format.GeoJSON()
       })
     })
@@ -64,7 +64,7 @@ const geoportal = function () {
   map.addLayer(
     new ol.layer.Image({
       source: new ol.source.ImageStatic({
-        url: '../suikzp.png',
+        url: './../suikzp.png',
         imageExtent: suikzpExtent,
 
       })
