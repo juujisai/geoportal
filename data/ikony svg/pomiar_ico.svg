@@ -1,0 +1,13 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="gold" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 16.5H24C26.4853 16.5 28.5 18.5147 28.5 21V37.5H7.5V21C7.5 18.5147 9.51472 16.5 12 16.5Z" stroke="black"/>
+<rect x="28.5" y="34.5" width="16" height="3" stroke="black"/>
+<rect x="44.25" y="31.25" width="0.5" height="6.5" stroke="black" stroke-width="0.5"/>
+<rect x="30.25" y="33.25" width="0.5" height="0.5" fill="#C4C4C4" stroke="black" stroke-width="0.5"/>
+<rect x="32.25" y="33.25" width="0.5" height="0.5" stroke="black" stroke-width="0.5"/>
+<rect x="34.25" y="33.25" width="0.5" height="0.5" stroke="black" stroke-width="0.5"/>
+<rect x="36.25" y="33.25" width="0.5" height="0.5" stroke="black" stroke-width="0.5"/>
+<rect x="38.25" y="33.25" width="0.5" height="0.5" stroke="black" stroke-width="0.5"/>
+<rect x="40.25" y="33.25" width="0.5" height="0.5" stroke="black" stroke-width="0.5"/>
+<rect x="42.25" y="33.25" width="0.5" height="0.5" stroke="black" stroke-width="0.5"/>
+<circle cx="18" cy="27" r="6.5" stroke="black"/>
+</svg>

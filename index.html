@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geoportal SZCZYTNO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300&family=Ubuntu&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <div class="wrap">
+    <div class="mobileHeader active">
+      <header>
+        <img class='herb' src="./images/herb-szczytno-28213.jpg" alt="Herb Miasta Szczytno">
+        <p class="title">Geoportal Miasta Szczytno</p>
+      </header>
+      <button class="continue">Przejdź do portalu</button>
+    </div>
+
+
+    <div id="map">
+
+
+    </div>
+
+
+    <div class="layerList">
+      <p class="important">Główne warstwy</p>
+
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="OSM" checked><label for="OSM">OpenStreetMap</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="MPZP"><label for="MPZP">Miejscowe Plany
+          Zagospodarowania Przestrzennego</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="SUIKZP"><label for="SUIKZP">Studium Uwarunkowań i Kierunków
+          Zagospodarowania Przestrzennego</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="orto"><label for="orto">Ortofotomapa</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="dzialki"><label for="dzialki">Działki</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="building"><label for="building">Budynki</label>
+      </div>
+
+      <p class="optional">Dodatkowe warstwy</p>
+
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="bus"><label for="bus">Przystanki autobusowe</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="road"><label for="road">Drogi</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="train"><label for="train">Linie kolejowe</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="fuel"><label for="fuel">Stacje paliw</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="parking"><label for="parking">Miejsca parkingowe</label>
+      </div>
+      <div class="layer">
+        <input type="checkbox" name="checkboxButton" id="add"><label for="add">Dodatkowe punkty</label>
+      </div>
+    </div>
+
+    <div class="tools active">
+      <div class="tool layer">
+        <img src="./data/ikony svg/warstwa_ico.svg" alt="Lista warstw">
+      </div>
+      <div class="tool info">
+        <img src="./data/ikony svg/info_ico.svg" alt="Info">
+      </div>
+      <div class="tool measure">
+        <img src="./data/ikony svg/pomiar_ico.svg" alt="Pomiar">
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+  <!-- <script src="./lib/build/ol.js"></script> -->
+
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

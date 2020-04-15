@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "paliwo_osm_3857_geo",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "osm_id": "185523580", "code": 5250, "fclass": "fuel", "name": "Orlen" }, "geometry": { "type": "Point", "coordinates": [ 2336389.609551732428372, 7086354.399316051974893 ] } },
+{ "type": "Feature", "properties": { "osm_id": "389367431", "code": 5250, "fclass": "fuel", "name": "Stacja paliw TP" }, "geometry": { "type": "Point", "coordinates": [ 2340437.368556035216898, 7087544.524430704303086 ] } },
+{ "type": "Feature", "properties": { "osm_id": "687591661", "code": 5250, "fclass": "fuel", "name": "Stacja benzynowa SHELL" }, "geometry": { "type": "Point", "coordinates": [ 2339778.56901310570538, 7087371.576520352624357 ] } },
+{ "type": "Feature", "properties": { "osm_id": "691362960", "code": 5250, "fclass": "fuel", "name": "Orlen" }, "geometry": { "type": "Point", "coordinates": [ 2335239.754611792974174, 7088306.016565074212849 ] } },
+{ "type": "Feature", "properties": { "osm_id": "704293894", "code": 5250, "fclass": "fuel", "name": "Nasza" }, "geometry": { "type": "Point", "coordinates": [ 2335520.747450668830425, 7088367.559750379063189 ] } },
+{ "type": "Feature", "properties": { "osm_id": "704705463", "code": 5250, "fclass": "fuel", "name": "Circle K. Express" }, "geometry": { "type": "Point", "coordinates": [ 2336136.551496620289981, 7088006.255511281080544 ] } }
+]
+}
