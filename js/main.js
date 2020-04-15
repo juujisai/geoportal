@@ -64,7 +64,7 @@ const geoportal = function () {
   map.addLayer(
     new ol.layer.Image({
       source: new ol.source.ImageStatic({
-        url: './../suikzp.png',
+        url: 'suikzp.png',
         imageExtent: suikzpExtent,
 
       })
