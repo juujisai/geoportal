@@ -206,7 +206,8 @@ button.continue {
   .herb {
     margin: 0 auto;
     padding-top: 2vh;
-    width: 30%;
+    width: auto;
+    height: 70vh;
   }
 
   /* main part */
@@ -240,13 +241,5 @@ button.continue {
     width: 80%;
   }
 
-
-}
-
-
-@media (orientation: landscape) and (min-height: 400px) {
-  .herb {
-    width: 25%;
-  }
 
 }
