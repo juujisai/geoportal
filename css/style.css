@@ -192,3 +192,60 @@ button.continue {
   }
 
 }
+
+
+/* media queries for landscape */
+
+@media (orientation: landscape) and (min-height: 300px) {
+
+  .wrap {
+    display: flex;
+  }
+
+  .herb {
+    margin: 0 auto;
+    padding-top: 2vh;
+    width: 30%;
+  }
+
+  /* main part */
+
+  #map {
+    width: 90%;
+    height: 100vh;
+  }
+
+  /* styles for layer list */
+
+
+  .layerList.active {
+    width: 90%;
+    height: 100vh;
+  }
+
+  /* styles for tools menu */
+
+  .tools {
+    width: 10%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-top: none;
+  }
+
+  .tools .tool {
+    height: 70%;
+    width: 80%;
+  }
+
+
+}
+
+
+@media (orientation: landscape) and (min-height: 400px) {
+  .herb {
+    width: 25%;
+  }
+
+}

@@ -1,3 +1,6 @@
+
+// handle init button for mobiles
+
 const geoportalInit = function () {
   const buttonContinue = document.querySelector('.continue');
   const mobileHeader = document.querySelector('.mobileHeader');
@@ -10,7 +13,7 @@ const geoportalInit = function () {
 
 geoportalInit()
 
-
+// handle layer menu for mobiles
 
 const toolsHandle = function () {
   const layersMenu = document.querySelector('.tool.layer');
