@@ -26,3 +26,30 @@ const toolsHandle = function () {
 
 
 toolsHandle()
+
+
+
+
+
+const geoportal = function () {
+  let x = 2338462.5263971756;
+  let y = 7087490.511769734;
+  let mapZoom = 10;
+
+  const map = new ol.Map({
+    view: new ol.View({
+      center: [x, y],
+      zoom: mapZoom
+    }),
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM(),
+      })
+    ],
+    target: 'map'
+  })
+
+
+}
+
+geoportal()
