@@ -32,21 +32,21 @@ toolsHandle()
 
 
 const geoportal = function () {
+  // Szczytno coordinates
   let x = 2338462.5263971756;
   let y = 7087490.511769734;
+
+  // default map zoom
   let mapZoom = 10;
+
+
+  // create map
 
   const map = new ol.Map({
     view: new ol.View({
       center: [x, y],
       zoom: mapZoom
     }),
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM(),
-        visible: true,
-      })
-    ],
     target: 'map'
   })
 
@@ -73,6 +73,14 @@ const geoportal = function () {
   const mpzp26Extent = [2336776.9052, 7088068.6848, 2337446.0241, 7088442.8847];
   const mpzp27Extent = [2337265.5102, 7087368.9895, 2338419.7994, 7088422.7236];
 
+  // default OSM map
+
+  const defaultOSM = new ol.layer.Tile({
+    source: new ol.source.OSM(),
+    visible: true,
+    title: 'OSM'
+  })
+
 
   // define vector layers
   const mpzpVectorLayer = new ol.layer.VectorImage({
@@ -81,7 +89,7 @@ const geoportal = function () {
       format: new ol.format.GeoJSON(),
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -173,7 +181,7 @@ const geoportal = function () {
       imageExtent: mpzp7Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -183,7 +191,7 @@ const geoportal = function () {
       imageExtent: mpzp11Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -193,7 +201,7 @@ const geoportal = function () {
       imageExtent: mpzp12Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -203,7 +211,7 @@ const geoportal = function () {
       imageExtent: mpzp13Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -213,7 +221,7 @@ const geoportal = function () {
       imageExtent: mpzp14Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -223,7 +231,7 @@ const geoportal = function () {
       imageExtent: mpzp15Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -233,7 +241,7 @@ const geoportal = function () {
       imageExtent: mpzp16Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -243,7 +251,7 @@ const geoportal = function () {
       imageExtent: mpzp17Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -253,7 +261,7 @@ const geoportal = function () {
       imageExtent: mpzp18Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -263,7 +271,7 @@ const geoportal = function () {
       imageExtent: mpzp19Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -273,7 +281,7 @@ const geoportal = function () {
       imageExtent: mpzp20Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -283,7 +291,7 @@ const geoportal = function () {
       imageExtent: mpzp21Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -293,7 +301,7 @@ const geoportal = function () {
       imageExtent: mpzp22Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -303,7 +311,7 @@ const geoportal = function () {
       imageExtent: mpzp23Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -313,7 +321,7 @@ const geoportal = function () {
       imageExtent: mpzp24Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -323,7 +331,7 @@ const geoportal = function () {
       imageExtent: mpzp25Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -333,7 +341,7 @@ const geoportal = function () {
       imageExtent: mpzp26Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -343,7 +351,7 @@ const geoportal = function () {
       imageExtent: mpzp27Extent,
       attributions: 'by BC2020'
     }),
-    visible: true,
+    visible: false,
     title: 'MPZP'
   })
 
@@ -364,7 +372,7 @@ const geoportal = function () {
       params: { LAYERS: 'DZIALKI' },
       attributions: 'do zmiany'
     }),
-    visible: true,
+    visible: false,
     title: 'dzialki'
   })
 
@@ -374,16 +382,18 @@ const geoportal = function () {
       params: { LAYERS: 'BUDYNKI' },
       attributions: 'do zmiany'
     }),
-    visible: true,
-    title: 'budynki'
+    visible: false,
+    title: 'building'
   })
 
   // add layer group
 
   const fullLayerGroup = new ol.layer.Group({
     layers: [
+      // default OSM
+      defaultOSM,
       // raster 1
-      mpzp07RasterLayer, mpzp11RasterLayer, mpzp12RasterLayer, mpzp13RasterLayer, mpzp14RasterLayer, mpzp15RasterLayer, mpzp16RasterLayer, mpzp17RasterLayer, mpzp18RasterLayer, mpzp19RasterLayer, mpzp20RasterLayer, mpzp21RasterLayer, mpzp22RasterLayer, mpzp23RasterLayer, mpzp24RasterLayer, mpzp25RasterLayer, mpzp26RasterLayer, mpzp27RasterLayer,
+      mpzp07RasterLayer, mpzp11RasterLayer, mpzp12RasterLayer, mpzp13RasterLayer, mpzp14RasterLayer, mpzp15RasterLayer, mpzp16RasterLayer, mpzp17RasterLayer, mpzp18RasterLayer, mpzp19RasterLayer, mpzp20RasterLayer, mpzp21RasterLayer, mpzp22RasterLayer, mpzp23RasterLayer, mpzp24RasterLayer, mpzp25RasterLayer, mpzp26RasterLayer, mpzp27RasterLayer, suikzpRasterLayer,
       // wms 2
       ortophotomapWMSLayer, dzialkiWMSLayer, budynkiWMSLayer,
       // vector 3
@@ -395,27 +405,28 @@ const geoportal = function () {
   // add layers to map
   map.addLayer(fullLayerGroup)
 
+  // layer switcher
+  const geoportalLayerOptions = document.querySelectorAll('.layerList input[type=checkbox]');
 
-  // test layers
-  // map.addLayer(
-  //   new ol.layer.VectorImage({
-  //     source: new ol.source.Vector({
-  //       url: 'data/warstwy gis GEOJSON/szczytno_3857_geojson.geojson',
-  //       format: new ol.format.GeoJSON()
-  //     })
-  //   })
-  // )
+  // console.log(geoportalLayerOptions)
 
-  // map.addLayer(
-  //   new ol.layer.Image({
-  //     source: new ol.source.ImageStatic({
-  //       url: 'suikzp.png',
-  //       imageExtent: suikzpExtent,
+  geoportalLayerOptions.forEach(option => {
+    option.addEventListener('change', function () {
+      let geoportalLayerOptionsElement = this.id;
+      let geoportalLayerGroup = fullLayerGroup.getLayers();
+      let currentLayer;
 
-  //     })
-  //   })
-  // )
+      geoportalLayerGroup.forEach(element => {
+        let elementTitle = element.get('title');
+        if (geoportalLayerOptionsElement === elementTitle) {
+          currentLayer = element
+        }
+      })
 
+      this.checked ? currentLayer.setVisible(true) : currentLayer.setVisible(false)
+      // console.log(this.checked);
+    })
+  })
 
 }
 
