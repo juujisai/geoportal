@@ -11,6 +11,10 @@ div.mobileHeader {
   width: 100%;
 }
 
+.geoportalDesktop {
+  display: none;
+}
+
 div.mobileHeader {
   position: fixed;
   top: 0;
@@ -240,6 +244,127 @@ button.continue {
     height: 70%;
     width: 80%;
   }
+
+
+}
+
+
+
+/* DESKTOP VERSION */
+
+@media (orientation: landscape) and (min-width: 1024px) {
+
+
+  div.mobileHeader,
+  div.mobileHeader.active {
+    display: none;
+  }
+
+  #map {
+    position: absolute;
+    left: 25%;
+    top: 5vh;
+    width: 75%;
+    height: 95vh;
+    border-top: 2px solid #000;
+  }
+
+  /* styles for layer list */
+
+
+  .layerList,
+  .layerList.active {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #fff;
+    letter-spacing: 2px;
+    animation: none;
+    border-right: 2px solid #000;
+  }
+
+
+
+
+  .layerList p {
+    line-height: 5vh;
+    padding: 0;
+    text-indent: 6%;
+    background-color: rgb(111, 124, 176);
+    letter-spacing: 3px;
+  }
+
+  .layer {
+    margin: 20px;
+  }
+
+
+  /* styles for tools menu */
+
+  .tools,
+  .tools.active {
+    position: absolute;
+    left: 25%;
+    top: 0%;
+    width: 20%;
+    height: 5vh;
+    flex-direction: row;
+    justify-content: left;
+    align-items: bottom;
+    border-top: none;
+    background-color: rgb(111, 124, 176);
+
+  }
+
+  .tools .tool {
+    margin: 0;
+    height: 5vh;
+    width: 20%;
+    transition: .3s;
+    border-right: 1px solid black;
+  }
+
+  .geoportalDesktop {
+    display: flex;
+    position: absolute;
+    left: 45%;
+    top: 0%;
+    padding-left: 20px;
+    height: 5vh;
+    width: 55%;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: rgb(111, 124, 176);
+  }
+
+  .geoportalDesktop p {
+    margin-left: 20px;
+  }
+
+  .geoportalDesktop img {
+    height: 100%;
+    width: auto;
+    margin-right: 20px;
+  }
+
+
+  /*  hover actions */
+  .layerList .layer:hover,
+  .layerList .layer:hover label {
+    cursor: pointer;
+  }
+
+
+  .tools .tool:hover {
+    cursor: pointer;
+    background-color: rgb(72, 88, 150);
+    box-shadow: 0px 3px 2px 0px rgb(12, 38, 138);
+  }
+
 
 
 }
