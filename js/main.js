@@ -429,7 +429,8 @@ const geoportal = function () {
   })
 
 
-
+  const select = new ol.interaction.Select();
+  map.addInteraction(select);
 
 
 
