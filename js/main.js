@@ -369,7 +369,7 @@ const geoportal = function () {
   const dzialkiWMSLayer = new ol.layer.Tile({
     source: new ol.source.TileWMS({
       url: 'https://integracja.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow',
-      params: { LAYERS: 'DZIALKI' },
+      params: { LAYERS: 'DZIALKI,NUMERY_DZIALEK' },
       attributions: 'do zmiany'
     }),
     visible: false,
