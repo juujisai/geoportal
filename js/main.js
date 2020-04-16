@@ -414,16 +414,16 @@ const geoportal = function () {
     option.addEventListener('change', function () {
       let geoportalLayerOptionsElement = this.id;
       let geoportalLayerGroup = fullLayerGroup.getLayers();
-      let currentLayer;
+      let currentLayer = [];
 
       geoportalLayerGroup.forEach(element => {
         let elementTitle = element.get('title');
         if (geoportalLayerOptionsElement === elementTitle) {
-          currentLayer = element
+          currentLayer.push(element)
         }
       })
-
-      this.checked ? currentLayer.setVisible(true) : currentLayer.setVisible(false)
+      // console.log(currentLayer)
+      this.checked ? currentLayer.forEach(one => one.setVisible(true)) : currentLayer.forEach(one => one.setVisible(false))
       // console.log(this.checked);
     })
   })
