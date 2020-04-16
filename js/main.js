@@ -44,6 +44,7 @@ const geoportal = function () {
     layers: [
       new ol.layer.Tile({
         source: new ol.source.OSM(),
+        visible: true,
       })
     ],
     target: 'map'
@@ -78,7 +79,7 @@ const geoportal = function () {
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/mpzp_3857_geo.geojson',
       format: new ol.format.GeoJSON(),
-      attribution: 'by BC2020'
+      attributions: 'by BC2020'
     }),
     visible: true,
     title: 'MPZP'
@@ -88,7 +89,7 @@ const geoportal = function () {
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/autobusy_osm_3857_geo.geojson',
       format: new ol.format.GeoJSON(),
-      attribution: 'by BC2020'
+      attributions: 'by BC2020'
     }),
     visible: false,
     title: 'bus'
@@ -98,7 +99,7 @@ const geoportal = function () {
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/drogi_osm_3857_geo.geojson',
       format: new ol.format.GeoJSON(),
-      attribution: 'by BC2020'
+      attributions: 'by BC2020'
     }),
     visible: false,
     title: 'road'
@@ -108,7 +109,7 @@ const geoportal = function () {
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/kolej_osm_3857_geo.geojson',
       format: new ol.format.GeoJSON(),
-      attribution: 'by BC2020'
+      attributions: 'by BC2020'
     }),
     visible: false,
     title: 'train'
@@ -118,7 +119,7 @@ const geoportal = function () {
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/paliwo_osm_3857_geo.geojson',
       format: new ol.format.GeoJSON(),
-      attribution: 'by BC2020'
+      attributions: 'by BC2020'
     }),
     visible: false,
     title: 'fuel'
@@ -128,7 +129,7 @@ const geoportal = function () {
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/parking_osm_3857_geo.geojson',
       format: new ol.format.GeoJSON(),
-      attribution: 'by BC2020'
+      attributions: 'by BC2020'
     }),
     visible: false,
     title: 'parking'
@@ -138,7 +139,7 @@ const geoportal = function () {
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/rozne_osm_3857_geo.geojson',
       format: new ol.format.GeoJSON(),
-      attribution: 'by BC2020'
+      attributions: 'by BC2020'
     }),
     visible: false,
     title: 'add'
@@ -148,7 +149,7 @@ const geoportal = function () {
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/szczytno_3857_geojson.geojson',
       format: new ol.format.GeoJSON(),
-      attribution: 'by BC2020'
+      attributions: 'by BC2020'
     }),
     visible: true,
     title: 'szczytno'
@@ -156,17 +157,212 @@ const geoportal = function () {
 
   // define raster layers
 
+  const suikzpRasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/suikzp.png',
+      imageExtent: suikzpExtent,
+      attributions: 'by BC2020'
+    }),
+    visible: false,
+    title: 'SUIKZP'
+  })
 
+  const mpzp07RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/07.png',
+      imageExtent: mpzp7Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
 
+  const mpzp11RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/11.png',
+      imageExtent: mpzp11Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp12RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/12.png',
+      imageExtent: mpzp12Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp13RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/13.png',
+      imageExtent: mpzp13Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp14RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/14.png',
+      imageExtent: mpzp14Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp15RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/15.png',
+      imageExtent: mpzp15Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp16RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/16.png',
+      imageExtent: mpzp16Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp17RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/17.png',
+      imageExtent: mpzp17Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp18RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/18.png',
+      imageExtent: mpzp18Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp19RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/19.png',
+      imageExtent: mpzp19Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp20RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/20.png',
+      imageExtent: mpzp20Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp21RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/21.png',
+      imageExtent: mpzp21Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp22RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/22.png',
+      imageExtent: mpzp22Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp23RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/23.png',
+      imageExtent: mpzp23Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp24RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/24.png',
+      imageExtent: mpzp24Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp25RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/25.png',
+      imageExtent: mpzp25Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp26RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/26.png',
+      imageExtent: mpzp26Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const mpzp27RasterLayer = new ol.layer.Image({
+    source: new ol.source.ImageStatic({
+      url: 'data/raster/27.png',
+      imageExtent: mpzp27Extent,
+      attributions: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  // add wms layers
 
   // add layer group
 
   const fullLayerGroup = new ol.layer.Group({
     layers: [
-      szczytnoVectorLayer, mpzpVectorLayer, busVectorLayer, roadVectorLayer, trainVectorLayer, fuelVectorLayer, parkingVectorLayer, addVectorLayer
+      // raster 1
+      mpzp07RasterLayer, mpzp11RasterLayer, mpzp12RasterLayer, mpzp13RasterLayer, mpzp14RasterLayer, mpzp15RasterLayer, mpzp16RasterLayer, mpzp17RasterLayer, mpzp18RasterLayer, mpzp19RasterLayer, mpzp20RasterLayer, mpzp21RasterLayer, mpzp22RasterLayer, mpzp23RasterLayer, mpzp24RasterLayer, mpzp25RasterLayer, mpzp26RasterLayer, mpzp27RasterLayer,
+      // wms 2
+      // vector 3
+      szczytnoVectorLayer, mpzpVectorLayer,
+      busVectorLayer, roadVectorLayer, trainVectorLayer, fuelVectorLayer, parkingVectorLayer, addVectorLayer
     ]
   })
 
+  // add layers to map
   map.addLayer(fullLayerGroup)
 
 
