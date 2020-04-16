@@ -33,11 +33,11 @@ toolsHandle()
 
 const geoportal = function () {
   // Szczytno coordinates
-  let x = 2338462.5263971756;
-  let y = 7087490.511769734;
+  let x = 2337120.1007963326;
+  let y = 7087900.5246428475;
 
   // default map zoom
-  let mapZoom = 10;
+  let mapZoom = 14;
 
 
   // create map
@@ -427,6 +427,16 @@ const geoportal = function () {
       // console.log(this.checked);
     })
   })
+
+
+
+
+
+
+  map.on('click', function (e) {
+    console.log(e.coordinate)
+  })
+
 
 }
 
