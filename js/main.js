@@ -348,6 +348,35 @@ const geoportal = function () {
   })
 
   // add wms layers
+  const ortophotomapWMSLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+      url: 'http://mapy.geoportal.gov.pl/wss/service/img/guest/ORTO/MapServer/WMSServer',
+      params: { LAYERS: 'Raster' },
+      attributions: 'do zmiany'
+    }),
+    visible: false,
+    title: 'orto'
+  })
+
+  const dzialkiWMSLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+      url: 'https://integracja.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow',
+      params: { LAYERS: 'DZIALKI' },
+      attributions: 'do zmiany'
+    }),
+    visible: true,
+    title: 'dzialki'
+  })
+
+  const budynkiWMSLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+      url: 'https://integracja.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow',
+      params: { LAYERS: 'BUDYNKI' },
+      attributions: 'do zmiany'
+    }),
+    visible: true,
+    title: 'budynki'
+  })
 
   // add layer group
 
@@ -356,6 +385,7 @@ const geoportal = function () {
       // raster 1
       mpzp07RasterLayer, mpzp11RasterLayer, mpzp12RasterLayer, mpzp13RasterLayer, mpzp14RasterLayer, mpzp15RasterLayer, mpzp16RasterLayer, mpzp17RasterLayer, mpzp18RasterLayer, mpzp19RasterLayer, mpzp20RasterLayer, mpzp21RasterLayer, mpzp22RasterLayer, mpzp23RasterLayer, mpzp24RasterLayer, mpzp25RasterLayer, mpzp26RasterLayer, mpzp27RasterLayer,
       // wms 2
+      ortophotomapWMSLayer, dzialkiWMSLayer, budynkiWMSLayer,
       // vector 3
       szczytnoVectorLayer, mpzpVectorLayer,
       busVectorLayer, roadVectorLayer, trainVectorLayer, fuelVectorLayer, parkingVectorLayer, addVectorLayer
