@@ -73,29 +73,122 @@ const geoportal = function () {
   const mpzp27Extent = [2337265.5102, 7087368.9895, 2338419.7994, 7088422.7236];
 
 
+  // define vector layers
+  const mpzpVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/mpzp_3857_geo.geojson',
+      format: new ol.format.GeoJSON(),
+      attribution: 'by BC2020'
+    }),
+    visible: true,
+    title: 'MPZP'
+  })
+
+  const busVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/autobusy_osm_3857_geo.geojson',
+      format: new ol.format.GeoJSON(),
+      attribution: 'by BC2020'
+    }),
+    visible: false,
+    title: 'bus'
+  })
+
+  const roadVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/drogi_osm_3857_geo.geojson',
+      format: new ol.format.GeoJSON(),
+      attribution: 'by BC2020'
+    }),
+    visible: false,
+    title: 'road'
+  })
+
+  const trainVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/kolej_osm_3857_geo.geojson',
+      format: new ol.format.GeoJSON(),
+      attribution: 'by BC2020'
+    }),
+    visible: false,
+    title: 'train'
+  })
+
+  const fuelVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/paliwo_osm_3857_geo.geojson',
+      format: new ol.format.GeoJSON(),
+      attribution: 'by BC2020'
+    }),
+    visible: false,
+    title: 'fuel'
+  })
+
+  const parkingVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/parking_osm_3857_geo.geojson',
+      format: new ol.format.GeoJSON(),
+      attribution: 'by BC2020'
+    }),
+    visible: false,
+    title: 'parking'
+  })
+
+  const addVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/rozne_osm_3857_geo.geojson',
+      format: new ol.format.GeoJSON(),
+      attribution: 'by BC2020'
+    }),
+    visible: false,
+    title: 'add'
+  })
+
+  const szczytnoVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/szczytno_3857_geojson.geojson',
+      format: new ol.format.GeoJSON(),
+      attribution: 'by BC2020'
+    }),
+    visible: true,
+    title: 'szczytno'
+  })
+
+  // define raster layers
 
 
 
 
+  // add layer group
 
-  map.addLayer(
-    new ol.layer.VectorImage({
-      source: new ol.source.Vector({
-        url: 'data/warstwy gis GEOJSON/szczytno_3857_geojson.geojson',
-        format: new ol.format.GeoJSON()
-      })
-    })
-  )
+  const fullLayerGroup = new ol.layer.Group({
+    layers: [
+      szczytnoVectorLayer, mpzpVectorLayer, busVectorLayer, roadVectorLayer, trainVectorLayer, fuelVectorLayer, parkingVectorLayer, addVectorLayer
+    ]
+  })
 
-  map.addLayer(
-    new ol.layer.Image({
-      source: new ol.source.ImageStatic({
-        url: 'suikzp.png',
-        imageExtent: suikzpExtent,
+  map.addLayer(fullLayerGroup)
 
-      })
-    })
-  )
+
+  // test layers
+  // map.addLayer(
+  //   new ol.layer.VectorImage({
+  //     source: new ol.source.Vector({
+  //       url: 'data/warstwy gis GEOJSON/szczytno_3857_geojson.geojson',
+  //       format: new ol.format.GeoJSON()
+  //     })
+  //   })
+  // )
+
+  // map.addLayer(
+  //   new ol.layer.Image({
+  //     source: new ol.source.ImageStatic({
+  //       url: 'suikzp.png',
+  //       imageExtent: suikzpExtent,
+
+  //     })
+  //   })
+  // )
 
 
 }
