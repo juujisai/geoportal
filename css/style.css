@@ -394,3 +394,8 @@ button.continue {
 .clicked {
   background-color: rgb(72, 88, 150);
 }
+
+
+.mpzpOverlay {
+  background-color: #fff;
+}

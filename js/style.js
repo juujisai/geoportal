@@ -162,7 +162,7 @@ const fuelIconStyle = new ol.style.Style({
 
 const selectStyle = new ol.style.Style({
   fill: new ol.style.Fill({
-    color: [0, 0, 255, 0.15]
+    color: [0, 0, 255, 0.3]
   }),
   stroke: new ol.style.Stroke({
     color: [255, 0, 0, 1],
