@@ -57,7 +57,8 @@ const geoportal = function () {
   const map = new ol.Map({
     view: new ol.View({
       center: [x, y],
-      zoom: mapZoom
+      zoom: mapZoom,
+      extent: [2312781.9973548115, 7070756.490883543, 2361599.185495575, 7104310.199451966]
     }),
     target: 'map',
     controls: myMapControls
@@ -103,7 +104,8 @@ const geoportal = function () {
       attributions: 'by BC2020'
     }),
     visible: false,
-    title: 'MPZP'
+    title: 'MPZP',
+    style: vectorFillStyleTransparent
   })
 
   const busVectorLayer = new ol.layer.VectorImage({
@@ -113,7 +115,8 @@ const geoportal = function () {
       attributions: 'by BC2020'
     }),
     visible: false,
-    title: 'bus'
+    title: 'bus',
+    style: busStopIconStyle
   })
 
   const roadVectorLayer = new ol.layer.VectorImage({
@@ -123,7 +126,8 @@ const geoportal = function () {
       attributions: 'by BC2020'
     }),
     visible: false,
-    title: 'road'
+    title: 'road',
+    style: roadsVectorStyle
   })
 
   const trainVectorLayer = new ol.layer.VectorImage({
@@ -133,7 +137,8 @@ const geoportal = function () {
       attributions: 'by BC2020'
     }),
     visible: false,
-    title: 'train'
+    title: 'train',
+    style: trainVectorStyle
   })
 
   const fuelVectorLayer = new ol.layer.VectorImage({
@@ -143,7 +148,8 @@ const geoportal = function () {
       attributions: 'by BC2020'
     }),
     visible: false,
-    title: 'fuel'
+    title: 'fuel',
+    style: fuelIconStyle
   })
 
   const parkingVectorLayer = new ol.layer.VectorImage({
@@ -153,7 +159,8 @@ const geoportal = function () {
       attributions: 'by BC2020'
     }),
     visible: false,
-    title: 'parking'
+    title: 'parking',
+    style: parkingFillStyleTransparent
   })
 
   const addVectorLayer = new ol.layer.VectorImage({
@@ -163,7 +170,8 @@ const geoportal = function () {
       attributions: 'by BC2020'
     }),
     visible: false,
-    title: 'add'
+    title: 'add',
+    style: addLayerStyle
   })
 
   const szczytnoVectorLayer = new ol.layer.VectorImage({
@@ -173,7 +181,8 @@ const geoportal = function () {
       attributions: 'by BC2020'
     }),
     visible: true,
-    title: 'szczytno'
+    title: 'szczytno',
+    style: vectorFillStyleTransparent
   })
 
   // define raster layers
