@@ -39,6 +39,18 @@ const geoportal = function () {
   // default map zoom
   let mapZoom = 14;
 
+  // add new controls to map
+  const zoomSlider = new ol.control.ZoomSlider()
+  const scaleLine = new ol.control.ScaleLine()
+  const zoomToExtent = new ol.control.ZoomToExtent({
+    label: 'Z',
+    extent: [2333232.4535, 7084767.8512, 2341708.2129, 7091120.6602]
+  })
+
+  const myMapControls = ol.control.defaults().extend([
+    zoomSlider, scaleLine, zoomToExtent
+  ])
+
 
   // create map
 
@@ -47,7 +59,8 @@ const geoportal = function () {
       center: [x, y],
       zoom: mapZoom
     }),
-    target: 'map'
+    target: 'map',
+    controls: myMapControls
   })
 
 
