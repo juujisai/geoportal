@@ -437,14 +437,11 @@ const geoportal = function () {
   })
 
 
-  const select = new ol.interaction.Select();
-  map.addInteraction(select);
 
 
-
-  map.on('click', function (e) {
-    console.log(e.coordinate)
-  })
+  // map.on('click', function (e) {
+  //   console.log(e.coordinate)
+  // })
 
 
 
@@ -459,11 +456,13 @@ const geoportal = function () {
 
     // flag for layer lsit
     let flag = true;
-    //handle mobile layer list
+    //handle mobile layer list (layer button)
+
     layersMenu.addEventListener('click', function () {
       if (window.innerWidth <= 1024) {
         layersList.classList.toggle('active')
       } else {
+        layersMenu.classList.toggle('clicked')
         everyObjectInHTML.forEach(object => {
           if (flag) {
             object.style.left = `${Math.round((object.offsetLeft / window.innerWidth - 0.25) * 100)}%`;
@@ -484,17 +483,34 @@ const geoportal = function () {
 
     })
 
+
+    // handle info button
+    const select = new ol.interaction.Select({
+      style: selectStyle,
+      layers: [mpzpVectorLayer]
+    });
+
+    const infoButton = document.querySelector('.info')
+
+    infoButton.addEventListener('click', function () {
+
+      infoButton.classList.toggle('clicked');
+      if (infoButton.classList.contains('clicked')) {
+        map.addInteraction(select);
+      } else {
+        map.removeInteraction(select)
+      }
+    })
+
+
+    // end of toolsHandle function
   }
 
+  // map refresh function
   const mapRefresh = function () {
     map.updateSize()
+
   }
-
-
-  // document.querySelector('.info').addEventListener('click', function () {
-  //   map.updateSize()
-  // })
-
 
   toolsHandle()
 
