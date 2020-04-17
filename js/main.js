@@ -13,20 +13,6 @@ const geoportalInit = function () {
 
 geoportalInit()
 
-// handle layer menu for mobiles
-
-const toolsHandle = function () {
-  const layersMenu = document.querySelector('.tool.layer');
-  const layersList = document.querySelector('.layerList');
-  layersMenu.addEventListener('click', function () {
-    layersList.classList.toggle('active')
-  })
-
-}
-
-
-toolsHandle()
-
 
 
 
@@ -461,6 +447,59 @@ const geoportal = function () {
   })
 
 
+
+  // handle tools menu 
+  const toolsHandle = function () {
+    const layersMenu = document.querySelector('.tool.layer');
+    const layersList = document.querySelector('.layerList');
+    const mapHTML = document.querySelector('#map')
+    const toolsHTML = document.querySelector('.tools')
+    const geoportalInfo = document.querySelector('.geoportalDesktop')
+    const everyObjectInHTML = [layersList, mapHTML, toolsHTML, geoportalInfo]
+
+    // flag for layer lsit
+    let flag = true;
+    //handle mobile layer list
+    layersMenu.addEventListener('click', function () {
+      if (window.innerWidth <= 1024) {
+        layersList.classList.toggle('active')
+      } else {
+        everyObjectInHTML.forEach(object => {
+          if (flag) {
+            object.style.left = `${Math.round((object.offsetLeft / window.innerWidth - 0.25) * 100)}%`;
+            if (object.id === 'map' || object.classList.contains('geoportalDesktop')) {
+              object.style.width = `${(Math.round(100 - object.offsetLeft / window.innerWidth * 100) + 25)}%`
+
+            }
+          } else {
+            object.style.left = `${Math.round((object.offsetLeft / window.innerWidth + 0.25) * 100)}%`
+            if (object.id === 'map' || object.classList.contains('geoportalDesktop')) {
+              object.style.width = `${(Math.round(100 - object.offsetLeft / window.innerWidth * 100) - 25)}%`
+            }
+          }
+        })
+      }
+      flag = !flag
+      setInterval(mapRefresh, 1)
+
+    })
+
+  }
+
+  const mapRefresh = function () {
+    map.updateSize()
+  }
+
+
+  // document.querySelector('.info').addEventListener('click', function () {
+  //   map.updateSize()
+  // })
+
+
+  toolsHandle()
+
+
 }
+
 
 geoportal()

@@ -260,6 +260,10 @@ button.continue {
     display: none;
   }
 
+  body {
+    overflow: hidden;
+  }
+
   #map {
     position: absolute;
     left: 25%;
@@ -267,6 +271,7 @@ button.continue {
     width: 75%;
     height: 95vh;
     border-top: 2px solid #000;
+    transition: .3s;
   }
 
   /* styles for layer list */
@@ -317,6 +322,8 @@ button.continue {
     align-items: bottom;
     border-top: none;
     background-color: rgb(111, 124, 176);
+    transition: .3s;
+
 
   }
 
@@ -325,7 +332,7 @@ button.continue {
     height: 5vh;
     width: 20%;
     transition: .3s;
-    border-right: 1px solid black;
+    border-right: 1px solid blac k;
   }
 
   .geoportalDesktop {
@@ -339,6 +346,8 @@ button.continue {
     align-items: center;
     font-family: 'Ubuntu', sans-serif;
     background-color: rgb(111, 124, 176);
+    transition: .3s;
+
   }
 
   .geoportalDesktop p {
@@ -366,5 +375,18 @@ button.continue {
   }
 
 
+
+
+
+
+  .hide {
+    position: absolute;
+    left: -30%;
+  }
+
+  .slideObject {
+    left: 0;
+    /* width: 100% !important; */
+  }
 
 }
