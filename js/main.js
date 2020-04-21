@@ -499,11 +499,12 @@ const geoportal = function () {
       if (infoButton.classList.contains('clicked')) {
         map.addInteraction(select);
         mpzpOverlayFunction()
+        generalOverlayFunction()
 
       } else {
         map.removeInteraction(select);
         mpzpOverlayFunction()
-
+        generalOverlayFunction()
       }
     })
 
@@ -550,7 +551,6 @@ const geoportal = function () {
             return layerCandidate.get('title') === 'MPZP'
           }
         }
-
       )
     }
 
@@ -558,6 +558,50 @@ const geoportal = function () {
       map.addEventListener('click', mpzpOverlayFunction)
     } else {
       map.removeEventListener('click', mpzpOverlayFunction)
+    }
+
+  }
+
+  const generalOverlayFunction = function () {
+    const generalOverlayHTML = document.querySelector('.generalOverlay')
+    const generalOverlayFclass = document.querySelector('span.fclass')
+    const generalOverlayName = document.querySelector('span.name')
+
+    const generalOverlay = new ol.Overlay({
+      element: generalOverlayHTML
+    })
+
+    map.addOverlay(generalOverlay)
+
+    const generalOverlayF = function (e) {
+      generalOverlay.setPosition(undefined)
+
+      map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+        let coordinates = e.coordinate
+        let clickedFclass = feature.get('fclass')
+        let clickedName = feature.get('name')
+        generalOverlay.setPosition(coordinates)
+        generalOverlayFclass.innerHTML = clickedFclass
+
+        if (clickedName === null) {
+          generalOverlayName.innerHTML = '-'
+        } else {
+          generalOverlayName.innerHTML = clickedName
+        }
+
+      },
+        {
+          layerFilter: function (layerCandidate) {
+            return layerCandidate.get('title') === 'bus' || layerCandidate.get('title') === 'add' || layerCandidate.get('title') === 'fuel' || layerCandidate.get('title') === 'parking' || layerCandidate.get('title') === 'road' || layerCandidate.get('title') === 'train'
+          }
+        }
+      )
+    }
+
+    if (document.querySelector('.info').classList.contains('clicked')) {
+      map.addEventListener('click', generalOverlayF)
+    } else {
+      map.removeEventListener('click', generalOverlayF)
     }
 
   }
