@@ -427,3 +427,9 @@ button.continue {
   border-bottom: 1px solid #000;
   letter-spacing: normal;
 }
+
+.distance {
+  /* background-color: #fff; */
+  font-family: arial;
+  color: rgb(12, 38, 138);
+}

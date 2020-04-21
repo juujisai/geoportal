@@ -47,7 +47,12 @@ const geoportal = function () {
       extent: [2312781.9973548115, 7070756.490883543, 2361599.185495575, 7104310.199451966]
     }),
     target: 'map',
-    controls: myMapControls
+    controls: myMapControls,
+    interactions: ol.interaction.defaults({
+      doubleClickZoom: false,
+      pinchRotate: false
+
+    })
   })
 
 
@@ -368,7 +373,7 @@ const geoportal = function () {
     source: new ol.source.TileWMS({
       url: 'http://mapy.geoportal.gov.pl/wss/service/img/guest/ORTO/MapServer/WMSServer',
       params: { LAYERS: 'Raster' },
-      attributions: 'do zmiany'
+      attributions: 'Geoportal'
     }),
     visible: false,
     title: 'orto'
@@ -378,7 +383,7 @@ const geoportal = function () {
     source: new ol.source.TileWMS({
       url: 'https://integracja.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow',
       params: { LAYERS: 'DZIALKI,NUMERY_DZIALEK' },
-      attributions: 'do zmiany'
+      attributions: 'GUGIK'
     }),
     visible: false,
     title: 'dzialki'
@@ -388,7 +393,7 @@ const geoportal = function () {
     source: new ol.source.TileWMS({
       url: 'https://integracja.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow',
       params: { LAYERS: 'BUDYNKI' },
-      attributions: 'do zmiany'
+      attributions: 'GUGIK'
     }),
     visible: false,
     title: 'building'
@@ -444,7 +449,7 @@ const geoportal = function () {
   // })
 
 
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // handle tools menu 
   const toolsHandle = function () {
     const layersMenu = document.querySelector('.tool.layer');
@@ -454,7 +459,7 @@ const geoportal = function () {
     const geoportalInfo = document.querySelector('.geoportalDesktop')
     const everyObjectInHTML = [layersList, mapHTML, toolsHTML, geoportalInfo]
 
-    // flag for layer lsit
+    // flag for layer list
     let flag = true;
     //handle mobile layer list (layer button)
 
@@ -509,9 +514,33 @@ const geoportal = function () {
     })
 
 
+    // handle measure button
+    const measureButton = document.querySelector('.measure')
+    measureButton.addEventListener('click', function () {
+      measureButton.classList.add('clicked')
+
+      let button = document.querySelector('.measure')
+
+      let source = new ol.source.Vector({
+        format: new ol.format.GeoJSON()
+      })
+      let draw = new ol.interaction.Draw({
+        source: source,
+        type: 'LineString'
+      })
+
+      map.removeInteraction(draw)
+
+      measure(button, source, draw)
+
+    })
+
+
     // end of toolsHandle function
   }
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  // function for getting info about mpzp - used in toolsHandle function
   const mpzpOverlayFunction = function () {
 
     const mpzpOverlayHTML = document.querySelector('.mpzpOverlay')
@@ -561,6 +590,7 @@ const geoportal = function () {
     }
 
   }
+  // function for getting info about other vector layers - used in toolsHandle function
 
   const generalOverlayFunction = function () {
     const generalOverlayHTML = document.querySelector('.generalOverlay')
@@ -603,8 +633,72 @@ const geoportal = function () {
     } else {
       map.removeEventListener('click', generalOverlayF)
     }
+  }
+
+
+  // function for measure button 
+
+
+  const measure = function (button, source, draw) {
+    map.addInteraction(draw)
+    let x1 = 0
+    let y1 = 0
+    let x2 = 0
+    let y2 = 0
+    let distance = 0
+    let infoPos;
+    const distContainer = document.querySelector('.distance')
+
+    const distanceOverlay = new ol.Overlay({
+      element: distContainer
+    })
+    map.addOverlay(distanceOverlay)
+    distanceOverlay.setPosition(undefined)
+
+    let coordinatesTable = []
+    let numberOfDistances = 0
+
+
+    const distanceFunction = function (e) {
+
+      coordinatesTable.push(e.coordinate)
+
+      if (numberOfDistances > 0) {
+        infoPos = e.coordinate
+        x1 = coordinatesTable[numberOfDistances - 1][0]
+        y1 = coordinatesTable[numberOfDistances - 1][1]
+        x2 = coordinatesTable[numberOfDistances][0]
+        y2 = coordinatesTable[numberOfDistances][1]
+
+        // dzielone na 1.66 ze względu na błąd układu odniesienia
+        distance = parseInt((Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / 1.65).toFixed(2)) + distance
+
+        distanceOverlay.setPosition(infoPos)
+        distContainer.innerHTML = distance + 'm'
+        console.log(distance)
+      }
+      numberOfDistances++
+
+    }
+
+    map.on('click', distanceFunction)
+
+
+    draw.on('drawend', function () {
+      map.removeInteraction(draw)
+      button.classList.remove('clicked')
+      map.removeEventListener('click', distanceFunction)
+      distanceOverlay.setPosition(undefined)
+
+    })
 
   }
+
+
+
+
+
+
 
   // map refresh function
   const mapRefresh = function () {
