@@ -555,10 +555,9 @@ const geoportal = function () {
     }
 
     if (document.querySelector('.info').classList.contains('clicked')) {
-      console.log('dziala')
       map.addEventListener('click', mpzpOverlayFunction)
     } else {
-      map.removeEvetListener('click', mpzpOverlayFunction)
+      map.removeEventListener('click', mpzpOverlayFunction)
     }
 
   }
