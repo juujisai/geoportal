@@ -520,18 +520,38 @@ const geoportal = function () {
       measureButton.classList.add('clicked')
 
       let button = document.querySelector('.measure')
+      const typeOfMeasureInfo = document.querySelector('.chooseMeasureMethod')
+      typeOfMeasureInfo.classList.toggle('active')
+
+
+
 
       let source = new ol.source.Vector({
         format: new ol.format.GeoJSON()
       })
-      let draw = new ol.interaction.Draw({
+      let drawLine = new ol.interaction.Draw({
         source: source,
         type: 'LineString'
       })
 
-      map.removeInteraction(draw)
+      let drawArea = new ol.interaction.Draw({
+        source: source,
+        type: 'Polygon'
+      })
 
-      measure(button, source, draw)
+
+      let typeOfMeasure;
+
+      const typeOfMeasureOptions = document.querySelectorAll('.chooseMeasureMethod button')
+      typeOfMeasureOptions.forEach(type => type.addEventListener('click', function () {
+        typeOfMeasure = type.classList[0]
+        console.log(typeOfMeasure)
+        measure(button, source, typeOfMeasure, drawLine, drawArea, typeOfMeasureInfo)
+
+      }))
+
+      // map.removeInteraction(draw)
+
 
     })
 
@@ -639,62 +659,154 @@ const geoportal = function () {
   // function for measure button 
 
 
-  const measure = function (button, source, draw) {
-    map.addInteraction(draw)
-    let x1 = 0
-    let y1 = 0
-    let x2 = 0
-    let y2 = 0
-    let distance = 0
-    let infoPos;
-    const distContainer = document.querySelector('.distance')
+  const measure = function (button, source, typeOfMeasure, drawLine, drawArea, typeOfMeasureInfo) {
 
-    const distanceOverlay = new ol.Overlay({
-      element: distContainer
-    })
-    map.addOverlay(distanceOverlay)
-    distanceOverlay.setPosition(undefined)
+    // add function to measure distance
 
-    let coordinatesTable = []
-    let numberOfDistances = 0
+    const measureDistance = function () {
+
+      let x1 = 0
+      let y1 = 0
+      let x2 = 0
+      let y2 = 0
+      let distance = 0
+      let infoPos;
+      const distContainer = document.querySelector('.distance')
+
+      const distanceOverlay = new ol.Overlay({
+        element: distContainer
+      })
+      map.addOverlay(distanceOverlay)
+      distanceOverlay.setPosition(undefined)
+
+      let coordinatesTable = []
+      let numberOfDistances = 0
 
 
-    const distanceFunction = function (e) {
+      const distanceFunction = function (e) {
+        coordinatesTable.push(e.coordinate)
 
-      coordinatesTable.push(e.coordinate)
+        if (numberOfDistances > 0) {
+          infoPos = e.coordinate
+          x1 = coordinatesTable[numberOfDistances - 1][0]
+          y1 = coordinatesTable[numberOfDistances - 1][1]
+          x2 = coordinatesTable[numberOfDistances][0]
+          y2 = coordinatesTable[numberOfDistances][1]
 
-      if (numberOfDistances > 0) {
-        infoPos = e.coordinate
-        x1 = coordinatesTable[numberOfDistances - 1][0]
-        y1 = coordinatesTable[numberOfDistances - 1][1]
-        x2 = coordinatesTable[numberOfDistances][0]
-        y2 = coordinatesTable[numberOfDistances][1]
+          // dzielone na 1.65 ze względu na błąd układu odniesienia
+          distance = parseInt((Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / 1.65).toFixed(2)) + distance
 
-        // dzielone na 1.66 ze względu na błąd układu odniesienia
-        distance = parseInt((Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / 1.65).toFixed(2)) + distance
+          distanceOverlay.setPosition(infoPos)
+          distContainer.innerHTML = distance + 'm'
+          console.log(distance)
+        }
+        numberOfDistances++
 
-        distanceOverlay.setPosition(infoPos)
-        distContainer.innerHTML = distance + 'm'
-        console.log(distance)
       }
-      numberOfDistances++
+
+      map.on('click', distanceFunction)
+
+      draw.on('drawend', function () {
+        map.removeInteraction(draw)
+        button.classList.remove('clicked')
+        map.removeEventListener('click', distanceFunction)
+        distanceOverlay.setPosition(undefined)
+        typeOfMeasureInfo.classList.remove('active')
+
+      })
+    }
+
+    // add function to measure area
+
+    const measureArea = function () {
+      const areaContainer = document.querySelector('.distance')
+
+      const areaOverlay = new ol.Overlay({
+        element: areaContainer
+      })
+      map.addOverlay(areaOverlay)
+      areaOverlay.setPosition(undefined)
+
+      let area = 0;
+      let areaPart = 0;
+      let infoPos;
+      let coordinatesTable = []
+
+      const areaFunction = function (e) {
+        // console.log('dd')
+        coordinatesTable.push(e.coordinate)
+        // infoPos = e.coordinate
+        let wspK = coordinatesTable.length - 1
+        let wspW = 0
+
+
+
+        if (coordinatesTable.length > 2) {
+          for (let i = 0; i < coordinatesTable.length; i++) {
+            if (wspK >= coordinatesTable.length) {
+              wspK = 0
+            }
+            if (wspW === coordinatesTable.length - 1) {
+              wspW = -1
+            }
+            areaPart = ((coordinatesTable[wspW + 1][1] - coordinatesTable[wspK][1]) * coordinatesTable[i][0]) / 2
+            area = area + areaPart
+
+            wspK++;
+            wspW++
+          }
+
+        }
+
+        // współczynnik korygujący, na podstawie średniej błędu powierzchni (porównanie danych z geoportal.pl)
+        let korekta = 2.34655008125637
+        // console.log(area)
+        area = Math.floor(-1 * area / korekta)
+
+        // etykieta
+        if (coordinatesTable.length > 2) {
+          let infoPosXMiddle = ((coordinatesTable[0][0] + coordinatesTable[Math.floor(coordinatesTable.length / 2) + 1][0]) / 2)
+          let infoPosYMiddle = ((coordinatesTable[0][1] + coordinatesTable[Math.floor(coordinatesTable.length / 2) - 1][1]) / 2)
+          infoPos = [infoPosXMiddle, infoPosYMiddle]
+          console.log(infoPos)
+          areaOverlay.setPosition(infoPos)
+
+          if (area > 1000000) {
+            areaContainer.innerHTML = (area / 1000000).toFixed(2) + 'km<sup>2</sup>'
+
+          } else {
+            areaContainer.innerHTML = area + 'm<sup>2</sup>'
+          }
+        }
+
+
+      }
+      map.on('click', areaFunction)
+
+      draw.on('drawend', function () {
+        map.removeInteraction(draw)
+        button.classList.remove('clicked')
+        map.removeEventListener('click', areaFunction)
+        areaOverlay.setPosition(undefined)
+        typeOfMeasureInfo.classList.remove('active')
+
+      })
 
     }
 
-    map.on('click', distanceFunction)
 
+    if (typeOfMeasure === 'drawLine') {
+      draw = drawLine
+      map.addInteraction(draw)
 
-    draw.on('drawend', function () {
-      map.removeInteraction(draw)
-      button.classList.remove('clicked')
-      map.removeEventListener('click', distanceFunction)
-      distanceOverlay.setPosition(undefined)
+      measureDistance()
 
-    })
-
+    } else {
+      draw = drawArea
+      map.addInteraction(draw)
+      measureArea()
+    }
   }
-
-
 
 
 

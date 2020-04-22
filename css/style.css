@@ -433,3 +433,64 @@ button.continue {
   font-family: arial;
   color: rgb(12, 38, 138);
 }
+
+.chooseMeasureMethod {
+  display: none;
+}
+
+.chooseMeasureMethod.active {
+  display: block;
+  position: fixed;
+  left: 35%;
+  top: 7vh;
+  /* transform: translate(-30%, -30%); */
+  /* z-index: 15; */
+  padding: 30px 50px;
+  background-color: #ddd;
+  border: 5px solid #eee;
+  border-radius: 5%;
+  box-shadow: 5px 5px 2px 0 #ddd;
+}
+
+.chooseMeasureMethod.active button {
+  position: relative;
+  line-height: 30px;
+  width: 200px;
+  /* padding: 0 30px; */
+  margin-left: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-color: #fff;
+  border: 1px solid black;
+  vertical-align: middle;
+  font-size: 17px;
+  overflow: hidden;
+  z-index: 5;
+  transition: .5s;
+
+}
+
+.chooseMeasureMethod.active button:after {
+  display: block;
+  content: '';
+  position: absolute;
+  left: -200%;
+  top: -450%;
+  width: 150%;
+  height: 1000%;
+  transform: rotate(45deg);
+  background-color: #bbb;
+  transition: 1s;
+  z-index: -1;
+
+}
+
+.chooseMeasureMethod.active button:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.chooseMeasureMethod.active button:hover:after {
+  left: 0%;
+
+}
