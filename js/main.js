@@ -15,7 +15,7 @@ geoportalInit()
 
 
 
-
+// main geoportal function
 
 const geoportal = function () {
   // Szczytno coordinates
@@ -39,7 +39,7 @@ const geoportal = function () {
 
 
   // create map
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const map = new ol.Map({
     view: new ol.View({
       center: [x, y],
@@ -78,6 +78,7 @@ const geoportal = function () {
   const mpzp26Extent = [2336776.9052, 7088068.6848, 2337446.0241, 7088442.8847];
   const mpzp27Extent = [2337265.5102, 7087368.9895, 2338419.7994, 7088422.7236];
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // default OSM map
 
   const defaultOSM = new ol.layer.Tile({
@@ -418,6 +419,7 @@ const geoportal = function () {
   // add layers to map
   map.addLayer(fullLayerGroup)
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // layer switcher
   const geoportalLayerOptions = document.querySelectorAll('.layerList input[type=checkbox]');
 
@@ -517,7 +519,7 @@ const geoportal = function () {
     // handle measure button
     const measureButton = document.querySelector('.measure')
     measureButton.addEventListener('click', function () {
-      measureButton.classList.add('clicked')
+      measureButton.classList.toggle('clicked')
 
       let button = document.querySelector('.measure')
       const typeOfMeasureInfo = document.querySelector('.chooseMeasureMethod')
@@ -531,7 +533,8 @@ const geoportal = function () {
       })
       let drawLine = new ol.interaction.Draw({
         source: source,
-        type: 'LineString'
+        type: 'LineString',
+        // finishCondition: new ol.events.condition.pointerMove()
       })
 
       let drawArea = new ol.interaction.Draw({
@@ -655,7 +658,7 @@ const geoportal = function () {
     }
   }
 
-
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // function for measure button 
 
 
@@ -712,6 +715,7 @@ const geoportal = function () {
         map.removeEventListener('click', distanceFunction)
         distanceOverlay.setPosition(undefined)
         typeOfMeasureInfo.classList.remove('active')
+        draw.finishDrawing()
 
       })
     }
@@ -783,6 +787,14 @@ const geoportal = function () {
       }
       map.on('click', areaFunction)
 
+
+      // map.on('click', function (e) {
+      //   // if (this.e.target)
+      //   console.log(this)
+
+      // })
+
+
       draw.on('drawend', function () {
         map.removeInteraction(draw)
         button.classList.remove('clicked')
@@ -797,25 +809,41 @@ const geoportal = function () {
 
     if (typeOfMeasure === 'drawLine') {
       draw = drawLine
+      finishDrawing(drawLine, drawArea)
       map.addInteraction(draw)
 
       measureDistance()
 
     } else {
       draw = drawArea
+      finishDrawing(drawLine, drawArea)
+
       map.addInteraction(draw)
       measureArea()
     }
+
+
   }
 
+  const finishDrawing = function (drawLine, drawArea) {
+    const buttonsForChooseType = [...document.querySelectorAll('.chooseMeasureMethod button')]
+    const buttonsForTools = [...document.querySelectorAll('.tools div.tool')]
+    const buttonsArray = buttonsForChooseType.concat(buttonsForTools)
 
+    buttonsArray.forEach(button => button.addEventListener('click', function () {
+      drawLine.finishDrawing()
+      drawArea.finishDrawing()
+      map.removeInteraction(drawLine)
+      map.removeInteraction(drawArea)
+    }))
+
+  }
 
 
 
   // map refresh function
   const mapRefresh = function () {
     map.updateSize()
-
   }
 
   toolsHandle()
