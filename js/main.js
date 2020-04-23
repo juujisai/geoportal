@@ -555,10 +555,19 @@ const geoportal = function () {
 
       }))
 
-      // map.removeInteraction(draw)
 
 
     })
+
+
+    // handle geolocation button
+    const geolocationButton = document.querySelector('.geolocation')
+    const geo = function () {
+      geolocationButton.classList.toggle('clicked')
+
+      geolocation(geolocationButton, map)
+    }
+    geolocationButton.addEventListener('click', geo)
 
 
     // end of toolsHandle function
