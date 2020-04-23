@@ -696,12 +696,18 @@ const geoportal = function () {
           x2 = coordinatesTable[numberOfDistances][0]
           y2 = coordinatesTable[numberOfDistances][1]
 
-          // dzielone na 1.65 ze względu na błąd układu odniesienia
-          distance = parseInt((Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / 1.65).toFixed(2)) + distance
+          // korekta ze względu na błąd układu odniesienia - obliczona ze średniej wartości błędu odległości kontrolnych
+          let korektaDl = 1.66091752354641
+          distance = parseInt((Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / korektaDl).toFixed(2)) + distance
 
           distanceOverlay.setPosition(infoPos)
-          distContainer.innerHTML = distance + 'm'
-          console.log(distance)
+
+          if (distance >= 1000) {
+            distContainer.innerHTML = (distance / 1000).toFixed(2) + 'km'
+
+          } else {
+            distContainer.innerHTML = distance + 'm'
+          }
         }
         numberOfDistances++
 
@@ -755,7 +761,7 @@ const geoportal = function () {
             }
             areaPart = ((coordinatesTable[wspW + 1][1] - coordinatesTable[wspK][1]) * coordinatesTable[i][0]) / 2
             area = area + areaPart
-
+            console.log(coordinatesTable)
             wspK++;
             wspW++
           }
@@ -763,8 +769,9 @@ const geoportal = function () {
         }
 
         // współczynnik korygujący, na podstawie średniej błędu powierzchni (porównanie danych z geoportal.pl)
-        let korekta = 2.34655008125637
-        // console.log(area)
+        // let korekta = 2.34655008125637
+        let korekta = 2.22610768770516
+        console.log(area)
         area = Math.floor(-1 * area / korekta)
 
         // etykieta
