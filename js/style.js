@@ -180,7 +180,7 @@ const selectStyle = new ol.style.Style({
 // style for drawLine
 const drawLineStyle = new ol.style.Style({
   stroke: new ol.style.Stroke({
-    color: [0, 0, 0, 1],
+    color: [0, 0, 255, 1],
     width: 3,
     lineDash: [10]
   })
@@ -190,10 +190,10 @@ const drawLineStyle = new ol.style.Style({
 
 const drawAreaStyle = new ol.style.Style({
   fill: new ol.style.Fill({
-    color: [0, 0, 0, 0.3]
+    color: [0, 0, 0, 0.2]
   }),
   stroke: new ol.style.Stroke({
-    color: [0, 0, 0, 1],
+    color: [255, 0, 0, 1],
     width: 3,
     lineDash: [10]
   })
