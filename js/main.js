@@ -534,12 +534,14 @@ const geoportal = function () {
       let drawLine = new ol.interaction.Draw({
         source: source,
         type: 'LineString',
+        style: drawLineStyle
         // finishCondition: new ol.events.condition.pointerMove()
       })
 
       let drawArea = new ol.interaction.Draw({
         source: source,
-        type: 'Polygon'
+        type: 'Polygon',
+        style: drawAreaStyle
       })
 
 
@@ -575,7 +577,7 @@ const geoportal = function () {
     const mpzpNazwa = document.querySelector('span.nazwa')
 
     const mpzpOverlay = new ol.Overlay({
-      element: mpzpOverlayHTML
+      element: mpzpOverlayHTML,
     })
     map.addOverlay(mpzpOverlay)
 

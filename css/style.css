@@ -431,7 +431,10 @@ button.continue {
 .distance {
   /* background-color: #fff; */
   font-family: arial;
-  color: rgb(12, 38, 138);
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  font-weight: bold;
+  /* color: rgb(12, 38, 138); */
 }
 
 .chooseMeasureMethod {

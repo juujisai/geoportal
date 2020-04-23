@@ -169,3 +169,32 @@ const selectStyle = new ol.style.Style({
     width: 2
   })
 })
+
+
+
+
+
+
+// style for measurment tools
+
+// style for drawLine
+const drawLineStyle = new ol.style.Style({
+  stroke: new ol.style.Stroke({
+    color: [0, 0, 0, 1],
+    width: 3,
+    lineDash: [10]
+  })
+})
+
+// style for drawArea
+
+const drawAreaStyle = new ol.style.Style({
+  fill: new ol.style.Fill({
+    color: [0, 0, 0, 0.3]
+  }),
+  stroke: new ol.style.Stroke({
+    color: [0, 0, 0, 1],
+    width: 3,
+    lineDash: [10]
+  })
+})
