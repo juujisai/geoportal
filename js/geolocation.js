@@ -1,5 +1,7 @@
 const geolocation = function (geolocationButton, map) {
   console.log('d')
+  let markerLayer;
+
   const mapViewProjection = map.getView().getProjection()
   const geolocationFunction = new ol.Geolocation({
     tracking: true,
@@ -8,6 +10,7 @@ const geolocation = function (geolocationButton, map) {
     },
     projection: mapViewProjection
   })
+
 
 
   const markerStyle = new ol.style.Style({
@@ -43,7 +46,7 @@ const geolocation = function (geolocationButton, map) {
   })
 
 
-  const markerLayer = new ol.layer.Vector({
+  markerLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
       features: [geoAccuracy, positionMarker]
     }),
@@ -53,15 +56,21 @@ const geolocation = function (geolocationButton, map) {
   map.addLayer(markerLayer)
 
 
+
   // do naprawy
   if (geolocationButton.classList.contains('clicked')) {
     markerLayer.setVisible(true)
+    geolocationFunction.setTracking(true)
+    console.log('dodaje')
+
+
 
   }
 
   map.on('click', function () {
     markerLayer.setVisible(false)
     geolocationButton.classList.remove('clicked')
+    geolocationFunction.setTracking(false)
   })
 
 
