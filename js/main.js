@@ -423,7 +423,7 @@ const geoportal = function () {
       // wms 2
       ortophotomapWMSLayer, dzialkiWMSLayer, budynkiWMSLayer,
       // vector 3
-      szczytnoVectorLayer, suikzpVectorLayer, mpzpVectorLayer,
+      szczytnoVectorLayer, mpzpVectorLayer, suikzpVectorLayer,
       busVectorLayer, roadVectorLayer, trainVectorLayer, fuelVectorLayer, parkingVectorLayer, addVectorLayer
     ]
   })
@@ -595,6 +595,7 @@ const geoportal = function () {
 
     const mpzpOverlayFunction = function (e) {
       mpzpOverlay.setPosition(undefined);
+      let featureData = []
       map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
 
         let coordinates = e.coordinate
@@ -610,17 +611,14 @@ const geoportal = function () {
         mpzpPrzeznaczenie2.innerHTML = clickedPolygonPrzeznaczenie2
         mpzpNrU.innerHTML = clickedPolygonNrU
         mpzpNazwa.innerHTML = clickedPolygonNazwa
+
         mpzpLegenda.href = `data/legenda/${feature.get('id')}.jpg`
         mpzpUchwala.href = `data/uchwaly/${feature.get('id')}.pdf`
 
       },
         {
           layerFilter: function (layerCandidate) {
-            if (document.querySelector('#MPZP').checked) {
-              return layerCandidate.get('title') === 'MPZP'
-            } else {
-              return layerCandidate.get('title') === 'SUIKZP'
-            }
+            return layerCandidate.get('title') === 'MPZP' || layerCandidate.get('title') === 'SUIKZP'
           }
         }
       )
