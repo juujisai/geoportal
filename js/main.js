@@ -89,6 +89,17 @@ const geoportal = function () {
 
 
   // define vector layers
+  const suikzpVectorLayer = new ol.layer.VectorImage({
+    source: new ol.source.Vector({
+      url: 'data/warstwy gis GEOJSON/suikzp_3857_geo.geojson',
+      format: new ol.format.GeoJSON(),
+      attributions: 'by BC2020'
+    }),
+    visible: false,
+    title: 'SUIKZP',
+    style: vectorFillStyleTransparent
+  })
+
   const mpzpVectorLayer = new ol.layer.VectorImage({
     source: new ol.source.Vector({
       url: 'data/warstwy gis GEOJSON/mpzp_3857_geo.geojson',
@@ -407,11 +418,12 @@ const geoportal = function () {
       // default OSM
       defaultOSM,
       // raster 1
-      mpzp07RasterLayer, mpzp11RasterLayer, mpzp12RasterLayer, mpzp13RasterLayer, mpzp14RasterLayer, mpzp15RasterLayer, mpzp16RasterLayer, mpzp17RasterLayer, mpzp18RasterLayer, mpzp19RasterLayer, mpzp20RasterLayer, mpzp21RasterLayer, mpzp22RasterLayer, mpzp23RasterLayer, mpzp24RasterLayer, mpzp25RasterLayer, mpzp26RasterLayer, mpzp27RasterLayer, suikzpRasterLayer,
+      suikzpRasterLayer,
+      mpzp07RasterLayer, mpzp11RasterLayer, mpzp12RasterLayer, mpzp13RasterLayer, mpzp14RasterLayer, mpzp15RasterLayer, mpzp16RasterLayer, mpzp17RasterLayer, mpzp18RasterLayer, mpzp19RasterLayer, mpzp20RasterLayer, mpzp21RasterLayer, mpzp22RasterLayer, mpzp23RasterLayer, mpzp24RasterLayer, mpzp25RasterLayer, mpzp26RasterLayer, mpzp27RasterLayer,
       // wms 2
       ortophotomapWMSLayer, dzialkiWMSLayer, budynkiWMSLayer,
       // vector 3
-      szczytnoVectorLayer, mpzpVectorLayer,
+      szczytnoVectorLayer, suikzpVectorLayer, mpzpVectorLayer,
       busVectorLayer, roadVectorLayer, trainVectorLayer, fuelVectorLayer, parkingVectorLayer, addVectorLayer
     ]
   })
@@ -584,6 +596,8 @@ const geoportal = function () {
     const mpzpPrzeznaczenie2 = document.querySelector('span.przeznaczenie2')
     const mpzpNrU = document.querySelector('span.nrU')
     const mpzpNazwa = document.querySelector('span.nazwa')
+    const mpzpLegenda = document.querySelector('a.legenda')
+    const mpzpUchwala = document.querySelector('a.uchwala')
 
     const mpzpOverlay = new ol.Overlay({
       element: mpzpOverlayHTML,
@@ -607,11 +621,13 @@ const geoportal = function () {
         mpzpPrzeznaczenie2.innerHTML = clickedPolygonPrzeznaczenie2
         mpzpNrU.innerHTML = clickedPolygonNrU
         mpzpNazwa.innerHTML = clickedPolygonNazwa
+        mpzpLegenda.href = `data/legenda/${feature.get('id')}.jpg`
+        mpzpUchwala.href = `data/uchwaly/${feature.get('id')}.pdf`
 
       },
         {
           layerFilter: function (layerCandidate) {
-            return layerCandidate.get('title') === 'MPZP'
+            return layerCandidate.get('title') === 'MPZP' || layerCandidate.get('title') === 'SUIKZP'
           }
         }
       )
