@@ -435,7 +435,6 @@ const geoportal = function () {
   // layer switcher
   const geoportalLayerOptions = document.querySelectorAll('.layerList input[type=checkbox]');
 
-  // console.log(geoportalLayerOptions)
 
   geoportalLayerOptions.forEach(option => {
     option.addEventListener('change', function () {
@@ -449,18 +448,9 @@ const geoportal = function () {
           currentLayer.push(element)
         }
       })
-      // console.log(currentLayer)
       this.checked ? currentLayer.forEach(one => one.setVisible(true)) : currentLayer.forEach(one => one.setVisible(false))
-      // console.log(this.checked);
     })
   })
-
-
-
-
-  // map.on('click', function (e) {
-  //   console.log(e.coordinate)
-  // })
 
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -547,7 +537,6 @@ const geoportal = function () {
         source: source,
         type: 'LineString',
         style: drawLineStyle
-        // finishCondition: new ol.events.condition.pointerMove()
       })
 
       let drawArea = new ol.interaction.Draw({
@@ -770,9 +759,7 @@ const geoportal = function () {
       let coordinatesTable = []
 
       const areaFunction = function (e) {
-        // console.log('dd')
         coordinatesTable.push(e.coordinate)
-        // infoPos = e.coordinate
         let wspK = coordinatesTable.length - 1
         let wspW = 0
 
@@ -820,13 +807,6 @@ const geoportal = function () {
 
       }
       map.on('click', areaFunction)
-
-
-      // map.on('click', function (e) {
-      //   // if (this.e.target)
-      //   console.log(this)
-
-      // })
 
 
       draw.on('drawend', function () {
