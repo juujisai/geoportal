@@ -798,11 +798,17 @@ const geoportal = function () {
           console.log(infoPos)
           areaOverlay.setPosition(infoPos)
 
-          if (area > 1000000) {
-            areaContainer.innerHTML = (area / 1000000).toFixed(2) + 'km<sup>2</sup>'
+
+          let areaFinale = Math.abs(area)
+          // let areaFinale = (Math.abs((area / 1000000)).toFixed(2))
+
+
+
+          if (areaFinale > 1000000) {
+            areaContainer.innerHTML = (areaFinale / 1000000).toFixed(2) + 'km<sup>2</sup>'
 
           } else {
-            areaContainer.innerHTML = area + 'm<sup>2</sup>'
+            areaContainer.innerHTML = areaFinale + 'm<sup>2</sup>'
           }
         }
 
