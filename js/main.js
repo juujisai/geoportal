@@ -616,7 +616,11 @@ const geoportal = function () {
       },
         {
           layerFilter: function (layerCandidate) {
-            return layerCandidate.get('title') === 'MPZP' || layerCandidate.get('title') === 'SUIKZP'
+            if (document.querySelector('#MPZP').checked) {
+              return layerCandidate.get('title') === 'MPZP'
+            } else {
+              return layerCandidate.get('title') === 'SUIKZP'
+            }
           }
         }
       )
